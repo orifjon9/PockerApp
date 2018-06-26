@@ -1,13 +1,7 @@
 var consts = require('../helpers/const-arrays'),
-    ValidationModule = require('../helpers/validations'),
-    CountSameValue = require('../helpers/count-values'),
-    CompareSameValueByTwoQuantity = require('./compare-same-value-by-two-quantity');
+    CountSameValue = require('../helpers/count-values');
 
-module.exports = (player1Arr, player2Arr) => {
-    return CompareSameValueByTwoQuantity(player1Arr, player2Arr, 3, 2);
-
-    /*const req1Count = 3;
-    const req2Count = 2;
+module.exports = (player1Arr, player2Arr, req1Count, req2Count) => {
     var player1CountSameValue = CountSameValue(player1Arr);
     var player2CountSameValue = CountSameValue(player2Arr);
 
@@ -23,5 +17,5 @@ module.exports = (player1Arr, player2Arr) => {
     if (player2CountSameValue.first.count === req1Count && player2CountSameValue.second.count === req2Count) {
         return 2;
     }
-    return undefined;*/
+    return undefined;
 }

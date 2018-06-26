@@ -13,7 +13,6 @@ module.exports = (arr) => {
         suit: first.suit,
         count: first.count
     };
-    console.log(valueArr);
 
     for (let j = valueArr.length - 2; j >= 0; j--) {
         const element = valueArr[j];

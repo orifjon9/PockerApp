@@ -8,8 +8,7 @@ module.exports = (player1Arr, player2Arr) => {
 
     // validation for both player have same suit each by 5
     if (player1CountSameSuit === reqCount && player2CountSameSuit === reqCount) {
-        return
-        consts.valueSeq.findIndex(f => f === player1Arr[0].charAt(0)) >
+        return consts.valueSeq.findIndex(f => f === player1Arr[0].charAt(0)) >
             consts.valueSeq.findIndex(f => f === player2Arr[0].charAt(0)) ? 1 : 2;
     }
 
