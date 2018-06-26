@@ -10,8 +10,8 @@ module.exports = (arr) => {
         count: valueArr[valueArr.length - 1]
     };
     var second = {
-        suit: first.suit,
-        count: first.count
+        suit: '',
+        count: -1
     };
 
     for (let j = valueArr.length - 2; j >= 0; j--) {
