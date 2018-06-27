@@ -7,6 +7,14 @@ Purpose of application to find winner player in pocker game.
 ## Installation process
 The system should have installed [Node.js](http://nodejs.org/) before running application 
 
+### Install npm packages
+
+Install the npm packages described in the `package.json` and verify that it works:
+
+```shell
+npm install
+```
+
 ## run application
 
 Use command in below to run application
