@@ -1,7 +1,7 @@
 var express = require('express'),
     fs = require('fs'),
-    SortModule = require('./helpers/sort'),
     consts = require('./helpers/const-arrays'),
+    separateCardModule = require('./helpers/separate-cards'),
 
     ruleStraightFlush = require('./rules/straight-flush'),
     ruleFourOfAKind = require('./rules/four-of-kind'),
@@ -39,25 +39,14 @@ if (process.argv.length > 2) {
         ];
 
         for (let i = 0; i < lines.length; i++) {
-            const cards = lines[i].split(' ');
-            if (cards.length !== 10) {
+            var winner = '';
+            var cards = separateCardModule(lines[i]);
+            if (!cards) {
                 continue;
             }
-            var winner = '';
-
-            var blackCards = cards.slice().splice(0, 5);
-            var whiteCards = cards.slice().splice(5);
-
-            whiteCards = whiteCards
-                .sort(SortModule.bySuit)
-                .sort(SortModule.byValue);
-            blackCards = blackCards
-                .sort(SortModule.bySuit)
-                .sort(SortModule.byValue);
-
             for (let index = 0; index < rules.length; index++) {
                 const rule = rules[index];
-                var valueOfRule = rule(blackCards, whiteCards);
+                var valueOfRule = rule(cards.player1, cards.player2);
                 if (valueOfRule || valueOfRule === 0) {
                     winner = consts.result[valueOfRule];
                     break;
