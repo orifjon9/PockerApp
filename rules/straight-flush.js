@@ -1,6 +1,5 @@
-var consts = require('../helpers/const-arrays'),
-    ValidationModule = require('../helpers/validations'),
-    CountSameSuit = require('../helpers/count-suits');
+var ValidationModule = require('../helpers/validations'),
+    CountSameSuit = require('../helpers/count-max-suits');
 
 module.exports = (player1Arr, player2Arr) => {
     const reqCount = 5;

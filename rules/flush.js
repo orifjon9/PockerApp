@@ -1,5 +1,5 @@
 var consts = require('../helpers/const-arrays'),
-    CountSameSuit = require('../helpers/count-suits');
+    CountSameSuit = require('../helpers/count-max-suits');
 
 module.exports = (player1Arr, player2Arr) => {
     const reqCount = 5;

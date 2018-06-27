@@ -1,5 +1,9 @@
 var expect = require('chai').expect,
     separateCardModule = require('../helpers/separate-cards'),
+    countMaxSuit = require('../helpers/count-max-suits'),
+    countValue = require('../helpers/count-values'),
+    sortModule = require('../helpers/sort'),
+    validationModule = require('../helpers/validations'),
 
     ruleStraightFlush = require('../rules/straight-flush'),
     ruleFourOfAKind = require('../rules/four-of-kind'),
@@ -15,6 +19,42 @@ var expect = require('chai').expect,
 describe('Picker App Test', () => {
     it('should be created', () => {
         expect(true).to.be.equal(true);
+    });
+
+    it('should be valid cards', () => {
+        var cards = separateCardModule('2H 3H 4H 5H 6H TD TC TS TH QH');
+        expect(cards).to.contain.all.keys(['player1', 'player2']);
+    });
+
+    it('should not be valid cards', () => {
+        var cards = separateCardModule('2H 3H 4H 5H 6H TD TC TS THQH');
+        expect(cards).to.be.undefined;
+    });
+
+    it('should be validate max count suit', () => {
+        expect(countMaxSuit(['TD', 'JC', 'QS', 'KH', 'QH'])).to.be.within(1, 3);
+    });
+
+    it('should be validate max count value', () => {
+        expect(countValue(['TD', 'JC', 'QS', 'KH', 'QH'])).to.includes.keys('first');
+    });
+
+    it('should be sorted by suit', () => {
+        expect(['TD', 'JC', 'QS', 'KH', 'QH']
+            .sort(sortModule.bySuit)).to.eql(['KH', 'QH', 'TD', 'JC', 'QS']);
+    });
+
+    it('should be sorted by value', () => {
+        expect(['TD', 'JC', 'QS', 'KH', 'AH']
+            .sort(sortModule.byValue)).to.eql(['AH', 'KH', 'QS', 'JC', 'TD']);
+    });
+
+    it('should be validate values sorted by value with result true', () => {
+        expect(validationModule.toValueSequence(['AH', 'KH', 'QS', 'JC', 'TD'])).to.true;
+    });
+
+    it('should be validate values sorted by value with result false', () => {
+        expect(validationModule.toValueSequence(['TD', 'JC', 'QS', 'KH', 'AH'])).to.false;
     });
 
     it('should be Black player win on using "Straight flush" rule', () => {
@@ -111,5 +151,17 @@ describe('Picker App Test', () => {
         var cards = separateCardModule('TH QS 4C 6D 5H AD KC KS 6H QH');
         expect(ruleOnePair(cards.player1, cards.player2))
             .to.be.equal(2);
+    });
+
+    it('should be White player win on using "High Card" rule', () => {
+        var cards = separateCardModule('2H 3D 5S 9C KD 2C 3H 4S 8C AH');
+        expect(ruleHighCard(cards.player1, cards.player2))
+            .to.be.equal(2);
+    });
+
+    it('should be Black player win on using "High Card" rule', () => {
+        var cards = separateCardModule('2H 3D 5S 9C KD 2C 3H 4S 8C QH');
+        expect(ruleHighCard(cards.player1, cards.player2))
+            .to.be.equal(1);
     });
 });

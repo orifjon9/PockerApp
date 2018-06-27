@@ -1,5 +1,4 @@
-var express = require('express'),
-    fs = require('fs'),
+var fs = require('fs'),
     consts = require('./helpers/const-arrays'),
     separateCardModule = require('./helpers/separate-cards'),
 
@@ -11,8 +10,9 @@ var express = require('express'),
     ruleStraight = require('./rules/straight'),
     ruleThreeOfAKind = require('./rules/three-of-a-kind'),
     ruleTwoPair = require('./rules/two-pair'),
-    ruleOnePair = require('./rules/one-pair'),
-    app = express();
+    ruleOnePair = require('./rules/one-pair');
+
+console.log('==============================================');
 
 if (process.argv.length > 2) {
     var filePath = process.argv[2];
@@ -58,10 +58,11 @@ if (process.argv.length > 2) {
         fs.writeFile('sampleoutput.txt', results, (err) => {
             if (!err) {
                 console.log('The results were written successfully');
-                console.log('Please, open sampleoutput.txt file near by project')
+                console.log('Please, open sampleoutput.txt file near by project');
+                console.log('==============================================');
             }
         });
     });
 } else {
-    console.log('Please put input file path')
+    console.log('Please put input file path');
 }
