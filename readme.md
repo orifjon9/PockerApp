@@ -1,4 +1,4 @@
-# Pocker App
+# Poker App
 This project can be run with Node.JS
 
 Purpose of application to find winner player in pocker game.
